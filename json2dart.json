@@ -1,0 +1,9 @@
+{
+  "id":100,
+  "name": "halo",
+  "idArr": [1],
+  "nameArr": ["1"],
+  "array0": {"aa":100,"bb": "halo"},
+  "array1": [{"aa":100,"bb": "halo"}],
+  "array2": [{"cc":{"aa":100,"bb": "halo"}}]
+}

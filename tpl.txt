@@ -1,0 +1,26 @@
+class {{.ClassName}} {{"{"}}{{range $i, $e := .Fields}}
+  final {{$e.DataType}} {{$e.FieldName}};{{end}}
+
+  const {{.ClassName}}({{range $i, $e := .Fields}}{{if gt $i 0}}, {{end}}this.{{$e.FieldName}}{{end}});
+
+  factory {{.ClassName}}.fromMap(Map<{{.DartMapKeyType}}, {{.DartMapValueType}}> m) {
+    return {{.ClassName}}({{range $i, $e := .Fields}}
+      m.containsKey("{{$e.JsonName}}") && m["{{$e.JsonName}}"] != null ? m["{{$e.JsonName}}"] : {{$e.Default}},{{end}}
+    );
+  }
+
+  Map<{{.DartMapKeyType}}, {{.DartMapValueType}}> toMap() {
+    return {{"{"}}{{range $i, $e := .Fields}}
+      "{{$e.FieldName}}": {{$e.FieldName}},{{end}}
+    };
+  }
+
+  String toJson() {
+    return '{{"{"}}{{range $i, $e := .Fields}}{{if gt $i 0}}, {{end}}"{{$e.FieldName}}":{{"$"}}{{$e.FieldName}}{{end}}{{"}"}}';
+  }
+
+  @override
+  String toString() {
+    return '{{"{"}}{{range $i, $e := .Fields}}{{if gt $i 0}}, {{end}}{{$e.FieldName}}: {{"$"}}{{$e.FieldName}}{{end}}{{"}"}}';
+  }
+}
