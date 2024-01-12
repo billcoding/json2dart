@@ -19,11 +19,13 @@ type (
 		Fields           []*Field
 	}
 	Field struct {
-		JsonName  string
-		FieldName string
-		DataType  string
-		Default   string
-		Array     bool
+		JsonName      string
+		FieldName     string
+		DataType      string
+		InnerDataType string
+		Default       string
+		Array         bool
+		ClassArray    bool
 	}
 )
 

@@ -137,6 +137,12 @@ func getOpts(m map[string]any, opt *Option) (outOpts []*Option) {
 		opt.Fields = append(opt.Fields, field)
 		outOpts = append(outOpts, setField(opt, k, v, field)...)
 		if field.Array {
+			if field.DataType == "int" || field.DataType == "double" || field.DataType == "String" {
+			} else {
+				field.Array = false
+				field.ClassArray = true
+			}
+			field.InnerDataType = field.DataType
 			field.DataType = fmt.Sprintf("List<%s>", field.DataType)
 			field.Default = "[]"
 		}

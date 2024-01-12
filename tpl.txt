@@ -5,7 +5,7 @@ class {{.ClassName}} {{"{"}}{{range $i, $e := .Fields}}
 
   factory {{.ClassName}}.fromMap(Map<{{.DartMapKeyType}}, {{.DartMapValueType}}> m) {
     return {{.ClassName}}({{range $i, $e := .Fields}}
-      m.containsKey("{{$e.JsonName}}") && m["{{$e.JsonName}}"] != null ? m["{{$e.JsonName}}"] : {{$e.Default}},{{end}}
+      m.containsKey("{{$e.JsonName}}") && m["{{$e.JsonName}}"] != null ? {{if $e.ClassArray}}(m["{{$e.JsonName}}"] as List<dynamic>).map((a) => a as Map<String, dynamic>).map((a) => {{$e.InnerDataType}}.fromMap(a)).toList(){{else if $e.Array}}(m["{{$e.JsonName}}"] as List<dynamic>).map((a) => a as {{$e.InnerDataType}}).toList(){{else}}m["{{$e.JsonName}}"]{{end}}: {{$e.Default}},{{end}}
     );
   }
 
