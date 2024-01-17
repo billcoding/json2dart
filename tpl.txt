@@ -16,7 +16,7 @@ class {{.ClassName}} {{"{"}}{{range $i, $e := .Fields}}
   }
 
   String toJson() {
-    return '{{"{"}}{{range $i, $e := .Fields}}{{if gt $i 0}}, {{end}}"{{$e.FieldName}}":{{"$"}}{{$e.FieldName}}{{end}}{{"}"}}';
+    return '{{"{"}}{{range $i, $e := .Fields}}{{if gt $i 0}}, {{end}}"{{$e.FieldName}}":{{if eq $e.DataType "String"}}"{{end}}{{"$"}}{{$e.FieldName}}{{if eq $e.DataType "String"}}"{{end}}{{end}}{{"}"}}';
   }
 
   @override

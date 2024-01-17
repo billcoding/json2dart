@@ -103,6 +103,9 @@ func setField(opt *Option, k string, v any, field *Field) (outOpts []*Option) {
 	case reflect.String:
 		field.DataType = "String"
 		field.Default = `""`
+	case reflect.Bool:
+		field.DataType = "bool"
+		field.Default = `false`
 	case reflect.Map:
 		classNameNext := opt.ClassName + case2UpperCamel(field.FieldName)
 		field.FieldName = k
@@ -137,7 +140,7 @@ func getOpts(m map[string]any, opt *Option) (outOpts []*Option) {
 		opt.Fields = append(opt.Fields, field)
 		outOpts = append(outOpts, setField(opt, k, v, field)...)
 		if field.Array {
-			if field.DataType == "int" || field.DataType == "double" || field.DataType == "String" {
+			if field.DataType == "int" || field.DataType == "double" || field.DataType == "String" || field.DataType == "bool" {
 			} else {
 				field.Array = false
 				field.ClassArray = true

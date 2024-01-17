@@ -1,12 +1,30 @@
 {
-  "code": 200,
-  "ddd": [{"wow": 1000}],
-  "data": {
-    "d": [
-      1,
-      2,
-      3,
-      4
-    ]
-  }
+  "intV": 100,
+  "intArrV": [100],
+  "doubleV": 100.25,
+  "doubleArrV": [100.25],
+  "stringV": "helo",
+  "stringArrV": ["helo"],
+  "boolV": false,
+  "boolArrV": [false],
+  "objV": {
+    "intV": 100,
+    "intArrV": [100],
+    "doubleV": 100.25,
+    "doubleArrV": [100.25],
+    "stringV": "helo",
+    "stringArrV": ["helo"],
+    "boolV": false,
+    "boolArrV": [false]
+  },
+  "objArrV": [{
+    "intV": 100,
+    "intArrV": [100],
+    "doubleV": 100.25,
+    "doubleArrV": [100.25],
+    "stringV": "helo",
+    "stringArrV": ["helo"],
+    "boolV": false,
+    "boolArrV": [false]
+  }]
 }
