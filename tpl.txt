@@ -15,8 +15,18 @@ class {{.ClassName}} {{"{"}}{{range $i, $e := .Fields}}
     };
   }
 
+  Map<{{.DartMapKeyType}}, {{.DartMapValueType}}> toOriginalMap() {
+    return {{"{"}}{{range $i, $e := .Fields}}
+      "{{$e.JsonName}}": {{$e.FieldName}},{{end}}
+    };
+  }
+
   String toJson() {
-    return '{{"{"}}{{range $i, $e := .Fields}}{{if gt $i 0}}, {{end}}"{{$e.FieldName}}":{{if eq $e.DataType "String"}}"{{end}}{{"$"}}{{$e.FieldName}}{{if eq $e.DataType "String"}}"{{end}}{{end}}{{"}"}}';
+    return jsonEncode(toMap());
+  }
+
+  String toOriginalJson() {
+    return jsonEncode(toOriginalMap());
   }
 
   @override
