@@ -3,9 +3,13 @@ class {{.ClassName}} {{"{"}}{{range $i, $e := .Fields}}
 
   const {{.ClassName}}({{range $i, $e := .Fields}}{{if gt $i 0}}, {{end}}this.{{$e.FieldName}}{{end}});
 
+  factory {{.ClassName}}.instance() {
+    return {{.ClassName}}.fromMap({});
+  }
+
   factory {{.ClassName}}.fromMap(Map<{{.DartMapKeyType}}, {{.DartMapValueType}}> m) {
     return {{.ClassName}}({{range $i, $e := .Fields}}
-      m.containsKey("{{$e.JsonName}}") && m["{{$e.JsonName}}"] != null ? {{if $e.ClassArray}}(m["{{$e.JsonName}}"] as List<dynamic>).map((a) => a as Map<String, dynamic>).map((a) => {{$e.InnerDataType}}.fromMap(a)).toList(){{else if $e.Array}}(m["{{$e.JsonName}}"] as List<dynamic>).map((a) => a as {{$e.InnerDataType}}).toList(){{else}}m["{{$e.JsonName}}"]{{end}}: {{$e.Default}},{{end}}
+      m.containsKey("{{$e.JsonName}}") && m["{{$e.JsonName}}"] != null ? {{if $e.ClassArray}}(m["{{$e.JsonName}}"] as List<dynamic>).map((a) => a as Map<String, dynamic>).map((a) => {{$e.InnerDataType}}.fromMap(a)).toList(){{else if $e.Array}}(m["{{$e.JsonName}}"] as List<dynamic>).map((a) => a as {{$e.InnerDataType}}).toList(){{else}}{{if eq $e.Default "null"}}{{$e.DataType}}.fromMap(m["{{$e.JsonName}}"]){{else}}m["{{$e.JsonName}}"]{{end}}{{end}}: {{if eq $e.Default "null"}}{{$e.DataType}}.instance(){{else}}{{$e.Default}}{{end}},{{end}}
     );
   }
 

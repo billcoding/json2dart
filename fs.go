@@ -26,6 +26,7 @@ type (
 		Default       string
 		Array         bool
 		ClassArray    bool
+		Object        bool
 	}
 )
 
