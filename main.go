@@ -108,7 +108,7 @@ func setField(opt *Option, k string, v any, field *Field) (outOpts []*Option) {
 		field.Default = `false`
 	case reflect.Map:
 		classNameNext := opt.ClassName + case2UpperCamel(field.FieldName)
-		field.FieldName = k
+		field.FieldName = case2Camel(k)
 		field.DataType = classNameNext
 		field.Default = "null"
 		optNext := &Option{
